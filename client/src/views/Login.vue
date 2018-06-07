@@ -34,7 +34,7 @@
 
                     </div>
                     <p class="has-text-grey">
-                        <router-link to="/register"><a href="../">Sign Up</a> &nbsp;·&nbsp;</router-link>
+                        <router-link to="/"><a href="../">Sign Up</a> &nbsp;·&nbsp;</router-link>
                         <a href="../">Forgot Password</a> &nbsp;·&nbsp; 
                         <a href="../">Need Help?</a>
                     </p>
@@ -55,6 +55,21 @@ import Navbar from '@/components/Navbar.vue'
 export default {
     components:{
         Navbar
+    },
+    data: function () {
+        return {
+            username: '',
+            password: ''
+        }
+    }, 
+    methods: {
+        login () {
+            let body = {
+                username: this.username,
+                password: this.password
+            }
+            this.$store.dispatch('login', body)
+        }
     }
 }
 </script>

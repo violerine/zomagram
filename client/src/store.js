@@ -11,6 +11,18 @@ export default new Vuex.Store({
 
   },
   actions: {
+    login: function (context, payload) {
+      console.log(payload)
+      axios.post('http://localhost:3000/users/login', payload)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    logout: function (context, payload) {
 
+    }
   }
 })
