@@ -1,17 +1,30 @@
+<<<<<<< 274650b9fe1772824d5915ef1fd58642876dce16
 require("dotenv").config();
+=======
+require('dotenv').config()
+>>>>>>> commit pertama database model food
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+<<<<<<< 274650b9fe1772824d5915ef1fd58642876dce16
 const mongoose = require('mongoose');
 const cors = require("cors");
 
+=======
+var cors = require('cors')
+>>>>>>> commit pertama database model food
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var photosRouter = require('./routes/foods')
+var mongoose = require('mongoose')
+const dbuser = process.env.DB_USER
+const dbpass = process.env.DB_PASS
+mongoose.connect(`mongodb://${dbuser}:${dbpass}@ds253468.mlab.com:53468/foodstagram`)
 
 var app = express();
-
+app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -31,6 +44,7 @@ mongoose.connect(dbUrl)
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/photos',photosRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
