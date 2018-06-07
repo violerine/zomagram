@@ -7,7 +7,7 @@
 Food Name:
 <div class="field container">
   <div class="control">
-    <input v-model="item_name" class="input is-link" type="text" placeholder="Food Name">
+    <input v-model="name" class="input is-link" type="text" placeholder="Food Name">
   </div>
 </div>
 
@@ -15,14 +15,21 @@ Food Name:
 Description: 
 <div class="field container">
   <div class="control">
-    <input v-model="item_description" class="input is-link" type="text" placeholder="Description">
+    <input v-model="description" class="input is-link" type="text" placeholder="Description">
+  </div>
+</div>
+
+Location: 
+<div class="field container">
+  <div class="control">
+    <input v-model="location" class="input is-link" type="text" placeholder="Location">
   </div>
 </div>
 <!--FILE UPLOAD-->
 
             <div class="file has-name container">
                 <label class="file-label">
-                    <input   class="file-input" type="file" name="resume">
+                    <input @change="previewFile"  class="file-input" type="file" name="resume">
                     <span class="file-cta">
                     <span class="file-icon">
                         <i class="fas fa-upload"></i>
@@ -40,7 +47,7 @@ Description:
             
 
         <!--FILE UPLOAD END-->
-<button  type="button" class="button is-link">Submit</button>
+<button  @click="addNewFood" type="button" class="button is-link">Submit</button>
 </div>
 
 </div>
@@ -57,6 +64,45 @@ import Navbar from '@/components/Navbar.vue'
 export default {
     components:{
         Navbar
+    },
+    data:function(){
+        return{
+            name:'',
+            description:'',
+            location:'',
+            formdata:new FormData(),
+            filename:''
+        }
+    },
+    methods:{
+        previewFile(file){
+          console.log({Event})
+          var filedata = file.target.files[0]
+          this.filename = filedata.name
+          this.formdata.append('image',filedata)
+          console.log(this.formdata)   
+          console.log("FILEDATA",filedata)
+        },
+        addNewFood(){
+            var usernameLocalStorage= localStorage.getItem('username')
+            let config ={
+                headers : {'content-type' : 'multipart/form-data'}
+            }
+            axios.post('http://localhost:7000/photos/upload',{
+                name:this.name,
+                desc:this.description,
+                location:this.location,
+                image:this.formdata,
+                username:usernameLocalStorage
+            },config)
+            .then(({data})=>{
+                console.log("DATA UPLOAD FOTO",data)
+            })
+            .catch(err=>{
+                console.log(this.formdata)
+                console.log("ERRORNYA KENAPA",err)
+            })
+        }
     }
 }
 </script>

@@ -33,7 +33,7 @@ class Controller {
         })
     }
     static upload(req,res){
-        console.log(req.file)
+        console.log("REQ FILE",req.file)
         let data = {
             name: req.body.name,
             desc: req.body.desc,
@@ -41,6 +41,7 @@ class Controller {
             url : req.file.cloudStoragePublicUrl,
             username: req.body.username
         }
+        
         let newUpload = new Model(data)
         newUpload.save()
         .then(dataFood=>{
@@ -48,6 +49,9 @@ class Controller {
                 message: 'data berhasil masuk',
                 dataFood
             })
+        })
+        .catch(err=>{
+            console.log("ERRORNYA",err)
         })
     }
     static delete(req,res){
