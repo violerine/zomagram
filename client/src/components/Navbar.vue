@@ -1,6 +1,5 @@
 <template>
 <div class="navbarandmodal">
-<Navbar/>
   <div class="navbar is-inline-flex is-transparent">
         <div class="navbar-brand">
             <a class="navbar-item">
@@ -27,9 +26,7 @@
             </a>
                <a class="navbar-item">
                 <p  class="control">
-                    <button aria-haspopup="true" class="button">
-                     <span><router-link to="/login">LogOut</router-link></span>
-                    </button>
+                    <button aria-haspopup="true" class="button" @click="logout">Logout</button>
                 </p>
             </a>
              <!-- <a class="navbar-item">
@@ -51,7 +48,16 @@
 </div>  
 </template>
 
-
+<script>
+    export default {
+        // name: 'navbar',
+        methods: {
+            logout () {
+                localStorage.removeItem('zooma-token')
+            }
+        }
+    }
+</script>
 
 
 

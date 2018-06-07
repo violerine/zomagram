@@ -11,6 +11,9 @@ router.put("/:username", userAuthorization, userController.updateUser);
 router.delete("/:username", userAuthorization, userController.deleteUser);
 
 router.post("/register", loginController.register);
+// router.post("/register", function (req, res){
+//   console.log(req.body)
+// });
 router.post("/login", authentication, loginController.login);
 
 module.exports = router;

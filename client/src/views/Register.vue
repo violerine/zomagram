@@ -14,7 +14,7 @@
 
                              <div class="field">
                                 <div class="control">
-                                    <input v-model="name" class="input is-large" type="email" placeholder="Your Email" autofocus="">
+                                    <input v-model="email" class="input is-large" type="email" placeholder="Your Email" autofocus="">
                                 </div>
                             </div>
                             <div class="field">
@@ -34,7 +34,7 @@
                   Remember me
                 </label>
                             </div>
-                            <button type="button" @click="register" class="button is-block is-link is-large is-fullwidth"><router-link to="/login">Sign up</router-link></button>
+                            <button type="button"  class="button is-block is-link is-large is-fullwidth"><router-link to="/login">Sign up</router-link></button>
                         </form>
                     </div>
                     <p class="has-text-grey">
@@ -56,6 +56,13 @@ import Navbar from '@/components/Navbar.vue'
 export default {
   components: {
     Navbar
+  },
+  data : function () {
+      return {
+          username: '',
+          email: '',
+          password: ''
+        }
   }
 }
 </script>
