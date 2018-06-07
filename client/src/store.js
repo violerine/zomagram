@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -12,17 +13,16 @@ export default new Vuex.Store({
   },
   actions: {
     login: function (context, payload) {
-      console.log(payload)
-      axios.post('http://localhost:3000/users/login', payload)
-      .then(response => {
-        console.log(response)
+      axios.post('http://localhost:7000/users/login', payload)
+      .then(({data}) => {
+        console.log("DATA TOKEN",data.token)
+        console.log("Data USERNAME",data.username)
+        localStorage.setItem('token',data.token)
+        localStorage.setItem('username',data.username)
       })
       .catch(err => {
         console.log(err)
       })
     },
-    logout: function (context, payload) {
-
-    }
   }
 })

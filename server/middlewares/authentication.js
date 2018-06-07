@@ -2,7 +2,7 @@ const { user } = require("../models");
 const bcrypt = require("bcrypt");
 
 module.exports = function(req, res, next) {
-  console.log(req.body)
+  console.log("REQ BODY",req.body)
   let username = req.body.username;
   user
     .findOne({ username })

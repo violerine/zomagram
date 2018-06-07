@@ -50,10 +50,11 @@
 
 <script>
     export default {
-        // name: 'navbar',
+        name: 'navbar',
         methods: {
             logout () {
-                localStorage.removeItem('zooma-token')
+                localStorage.clear()
+                console.log("cek kalo udah ke clear localstoragenya",localStorage.getItem('username'))
             }
         }
     }

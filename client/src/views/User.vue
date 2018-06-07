@@ -13,7 +13,9 @@
 
                         <p>User:</p>
                     <router-link to="/new"><button class="button">Upload New Food</button></router-link>
-                    <Post/>
+                    <div v-for="(post,index) in posts" :key="index" class="postsbyuserrname">
+                        <Post :post="post"/>
+                    </div>
                     </div>
             
                 </div>
@@ -32,6 +34,27 @@ export default {
     components:{
         Navbar,
         Post
+    },
+    data:function(){
+        return{
+            posts:[]
+        }
+    },
+    created:function(){
+        this.getFoodByUsername()
+    },
+    methods:{
+        getFoodByUsername(){
+            const username = localStorage.getItem('username')
+            axios.get(`http://localhost:7000/photos/${username}`)
+            .then(({data})=>{
+                this.posts=data
+                console.log("FOOD BY USERNAME",data)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        },
     }
 }
 </script>

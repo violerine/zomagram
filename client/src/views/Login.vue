@@ -69,6 +69,13 @@ export default {
                 password: this.password
             }
             this.$store.dispatch('login', body)
+            .then(()=>{
+                this.$router.push({'path' : '/home'})
+
+            })
+            .catch(((err)=>{
+                console.log(err)
+            }))
         }
     }
 }
