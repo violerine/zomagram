@@ -7,7 +7,7 @@ let foodSchema = mongoose.Schema({
     desc : String,
     location : String,
     url: String,
-    postedBy : {type: ObjectId,ref: 'User'}
+    username : String
 },{timestamps:{createdAt: 'created_at',updatedAt: 'updated_at'}})
 
 let Foods = mongoose.model('Food',foodSchema)
