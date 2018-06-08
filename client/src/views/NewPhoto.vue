@@ -22,7 +22,7 @@ Description:
 Location: 
 <div class="field container">
   <div class="control">
-    <input v-model="location" class="input is-link" type="text" placeholder="Location">
+    <input v-model="location" class="input is-link" type="text" placeholder="City">
   </div>
 </div>
 <!--FILE UPLOAD-->
@@ -62,10 +62,11 @@ export default {
             formData.append('image', this.file)
             formData.append('username', localStorage.getItem('username'))
             formData.append('name',this.name)
-            formData.append('description',this.description)
+            formData.append('desc',this.description)
             formData.append('location',this.location)
             this.$store.dispatch('uploadImage', formData)
             this.$store.dispatch('getPost')
+            this.$router.push('/user')
         }
     }
 }

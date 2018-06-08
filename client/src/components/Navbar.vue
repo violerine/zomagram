@@ -3,17 +3,12 @@
   <div class="navbar is-inline-flex is-transparent">
         <div class="navbar-brand">
             <a class="navbar-item">
-                <img src="../assets/zomagram.png" width="120" height="40" alt="Zomagram">
+                <router-link to="/home"><img src="../assets/zomagram.png" width="120" height="40" alt="Zomagram"></router-link>
             </a>
         </div>
         <div class="navbar-menu">
             <div class="navbar-item">
-                <div class="control has-icons-left">
-                    <input class="input is-small has-text-centered" type="text" placeholder="search">
-                    <span class="icon is-left is-small">
-                        <i class="material-icons">search</i>
-                    </span>
-                </div>
+
             </div>
         </div>
         <div class="navbar-item is-flex-touch">
@@ -68,6 +63,7 @@
         methods: {
             logout () {
                 this.$store.dispatch('logout')
+                this.$router.push('/login')
             }
         }
     }

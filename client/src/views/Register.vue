@@ -30,8 +30,7 @@
                             </div>
                             <div class="field">
                                 <label class="checkbox">
-                  <input type="checkbox">
-                  Remember me
+        
                 </label>
                             </div>
                             <button @click="register()" type="button"  class="button is-block is-link is-large is-fullwidth"><router-link to="/login">Sign up</router-link></button>
@@ -39,8 +38,6 @@
                     </div>
                     <p class="has-text-grey">
                         <router-link to="/login"><a href="../">Login</a> &nbsp;·&nbsp;</router-link>
-                        <a href="../">Forgot Password</a> &nbsp;·&nbsp;
-                        <a href="../">Need Help?</a>
                     </p>
                 </div>
             </div>

@@ -25,8 +25,6 @@
                             </div>
                             <div class="field">
                                 <label class="checkbox">
-                  <input type="checkbox">
-                  Remember me
                 </label>
                             </div>
                             <button type="button" @click="login" class="button is-block is-link is-large is-fullwidth">Login</button>
@@ -35,8 +33,6 @@
                     </div>
                     <p class="has-text-grey">
                         <router-link to="/"><a href="../">Sign Up</a> &nbsp;·&nbsp;</router-link>
-                        <a href="../">Forgot Password</a> &nbsp;·&nbsp; 
-                        <a href="../">Need Help?</a>
                     </p>
                 </div>
             </div>
@@ -51,10 +47,16 @@
 <script>
 
 import Navbar from '@/components/Navbar.vue'
+import {mapActions, mapState} from 'vuex'
 
 export default {
     components:{
         Navbar
+    },
+    computed:{
+        ...mapState([
+            'checkLogin'
+        ])
     },
     data: function () {
         return {
@@ -63,20 +65,30 @@ export default {
         }
     }, 
     methods: {
-        login () {
+        login: function () {
             let body = {
                 username: this.username,
                 password: this.password
             }
-            this.$store.dispatch('login', body)
-            .then(()=>{
-                this.$router.push({'path' : '/home'})
-
+            axios.post('http://localhost:7000/users/login', body)
+            .then(({data}) => {
+                console.log("DATA TOKEN",data.token)
+                console.log("Data USERNAME",data.username)
+                localStorage.setItem('token',data.token)
+                localStorage.setItem('username',data.username)
+                // context.commit('setStat', true)
+                this.$store.dispatch('checkstat')
+                this.$router.push('/home')
+                swal('succesfully logged in')
             })
-            .catch(((err)=>{
-                console.log(err)
-            }))
-        }
+            .catch(err => {
+                console.log('errorrrrrr', err)
+                let errorMsg = err
+                swal("wrong password/username")
+            })
+         },
+
+        
     }
 }
 </script>

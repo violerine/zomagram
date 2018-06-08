@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     foods: [],
     statlog:'',
-    onefood: ''
+    onefood: '',
+    checkLogin:''
   },
   mutations: {
     setFoods (state, payload) {
@@ -60,8 +61,7 @@ export default new Vuex.Store({
     getPost: function (context) {
       axios.get('http://localhost:7000/photos/')
          .then(({data})=>{
-            //  console.log(data.foods.slice(2))
-             let result = data.foods.slice(2)
+             let result = data.foods
              context.commit('setFoods', result)
              
          }) 
