@@ -11,10 +11,11 @@
                             <img src="https://placehold.it/128x128">
                         </figure>
 
-                        <p>User:</p>
+                        <p>Foods By {{currentUser}}</p>
                     <router-link to="/new"><button class="button">Upload New Food</button></router-link>
-                    <div v-for="(post,index) in posts" :key="index" class="postsbyuserrname">
-                        <p>{{post}}</p>
+                    <div v-for="(food,index) in posts" :key="index" class="postsbyuserrname">
+                     
+                        <Post :food="food" />
                     </div>
                     </div>
             
@@ -37,11 +38,13 @@ export default {
     },
     data:function(){
         return{
-            posts:[]
+            posts:[],
+            currentUser:''
         }
     },
     created:function(){
         this.getFoodByUsername()
+        this.checkUser()
     },
     methods:{
         getFoodByUsername(){
@@ -55,6 +58,9 @@ export default {
                 console.log(err)
             })
         },
+        checkUser(){
+            this.currentUser=localStorage.getItem('username')
+        }
     }
 }
 </script>

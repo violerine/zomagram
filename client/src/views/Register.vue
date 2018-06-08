@@ -34,7 +34,7 @@
                   Remember me
                 </label>
                             </div>
-                            <button type="button"  class="button is-block is-link is-large is-fullwidth"><router-link to="/login">Sign up</router-link></button>
+                            <button @click="register()" type="button"  class="button is-block is-link is-large is-fullwidth"><router-link to="/login">Sign up</router-link></button>
                         </form>
                     </div>
                     <p class="has-text-grey">
@@ -71,6 +71,7 @@ export default {
         email: this.email,
         password: this.password
       }
+      console.log("MASUK REGISTER")
       this.$store.dispatch('register', body)
       }
   }

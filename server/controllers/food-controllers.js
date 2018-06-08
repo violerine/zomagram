@@ -21,7 +21,6 @@ class Controller {
         Model.find({username: req.params.username})
         .then(dataFood=>{
             res.status(200).json({
-                message: `menampilkan food berdasarkan user`,
                 dataFood
             })
         })
