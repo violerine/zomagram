@@ -5,14 +5,14 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
   register: function(req, res) {
-    console.log(req.body)
+    console.log(req.body);
     let username = req.body.username;
     let email = req.body.email;
     if (req.body.password.length < 8) {
       res.status(500).json({
         message: "password need 8 characters"
       });
-    }else{
+    } else {
       const salt = bcrypt.genSaltSync(7);
       const hash = bcrypt.hashSync(req.body.password, salt);
       let password = hash;
@@ -38,13 +38,17 @@ module.exports = {
               });
           }
         })
-        .catch();
+        .catch(err => {
+          if (err) {
+            console.log(err);
+          }
+        });
     }
   },
   login: function(req, res) {
     let username = req.body.username;
     let token = jwt.sign({ username }, process.env.SECRET_KEY);
-    console.log('masuuuuuuuk', token)
+    console.log("masuuuuuuuk", token);
     res.status(200).json({
       message: "successfully sign in",
       token,

@@ -16,6 +16,7 @@ class Controller {
             })
         })
     }
+
     static show(req,res){
         Model.find({username: req.params.username})
         .then(dataFood=>{
