@@ -56,6 +56,21 @@
                         </div>
                     </div>
                 </div>
+                 <button class="button" @click="getShare(food.url)">Share to Facebook</button>
+                 <br><br>
+                <div v-if="sharestat">
+                  <iframe
+                   :src="shareLink"
+                   width="73"
+                   height="28"
+                   style="border:none;overflow:hidden"
+                   scrolling="no"
+                   frameborder="0"
+                   allowTransparency="true"
+                   allow="encrypted-media">
+               </iframe>
+                </div>
+                
 
     </div>
 </template>
@@ -68,7 +83,8 @@ export default {
     data:function(){
         return{
             restos:[],
-            currentUser:''
+            currentUser:'',
+            sharestat: false
         }
     },
     created:function(){
@@ -83,6 +99,14 @@ export default {
         ...mapActions([
             'getPost'
         ]),
+
+        getShare (link) {
+            this.sharestat = true
+            let uri = link
+            let encoded = encodeURI(uri)
+            let shareLinks =`https://www.facebook.com/plugins/share_button.php?href=${encoded}&layout=button&size=large&mobile_iframe=true&appId=239483590150835&width=73&height=28`
+            this.shareLink = shareLinks
+        },
         checkUsername(){
             var username=localStorage.getItem('username')
             console.log("USERNAME",username)

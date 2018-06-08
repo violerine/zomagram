@@ -30,6 +30,7 @@
 
 import Navbar from '@/components/Navbar.vue'
 import Post from '@/components/Post.vue'
+import {mapState} from 'vuex'
 
 export default {
     components:{
@@ -39,12 +40,20 @@ export default {
     data:function(){
         return{
             posts:[],
-            currentUser:''
+            currentUser:'',
         }
+    },
+    computed:{
+        ...mapState([
+            'statlog'
+        ])
     },
     created:function(){
         this.getFoodByUsername()
         this.checkUser()
+        if(this.statlog==false){
+            this.$router.push('/login')
+        }
     },
     methods:{
         getFoodByUsername(){
@@ -60,6 +69,8 @@ export default {
         },
         checkUser(){
             this.currentUser=localStorage.getItem('username')
+            this.$store.dispatch('cekstat')
+            
         }
     }
 }
