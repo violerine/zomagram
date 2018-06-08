@@ -5,7 +5,7 @@
     <button class="button is-success" @click="getCity(onefood.name, onefood.location)">click to show</button>
     <br>
     <br>
-    <div style="text-align: center;">
+    <!-- <div style="text-align: center;">
         <div v-for="(resto,index) in restos" :key="index"  class="container is-fluid">
           <div class="columns is-multiline">
             <div class="column is-one-fifths">
@@ -35,7 +35,42 @@
             <hr width="50%">
           </div>
         </div>
-    </div>
+    </div> -->
+
+
+
+
+<!--CARD-->
+<div class="container ">
+<div class="columns is-multiline">
+<div v-for="(resto,index) in restos" :key="index" >
+  <div class="card">
+  <div class="card-image">
+    <figure class="image is-4by4">
+      <img :src=resto.restaurant.featured_image alt="Placeholder image">
+    </figure>
+  </div>
+  <div class="card-content">
+      <!-- <div class="content"> -->
+        <p class="title is-4">restaurant name : {{resto.restaurant.name}}</p>
+      <!-- </div> -->
+
+        <p class="title is-6">average cost : {{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(resto.restaurant.average_cost_for_two)}}</p>
+
+        <p class="title is-6">address : {{resto.restaurant.location.address}}</p>
+
+        <p class="title is-6">user rating : {{resto.restaurant.user_rating.aggregate_rating}}</p>
+        <br><br>       
+        
+  </div>
+</div>
+</div>
+</div>
+</div>
+<!--CARD END-->
+
+
+
 
   </div>
 </template>
@@ -84,10 +119,12 @@ export default {
                     this.restos=data.restaurants
                 })
                 .catch(err=>{
+                    
                     console.log(err)
                 })
             })
             .catch(err=>{
+                swal('location id not defined')
                 console.log(err)
             })
         }

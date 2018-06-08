@@ -22,17 +22,6 @@
                     <div class="level is-mobile">
                         <div class="level-left">
                             <div class="level-item has-text-centered">
-                                
-                                <iframe 
-                                    :src="shareLink" 
-                                    width="73" 
-                                    height="28" 
-                                    style="border:none;overflow:hidden" 
-                                    scrolling="no" 
-                                    frameborder="0" 
-                                    allowTransparency="true" 
-                                    allow="encrypted-media">
-                                </iframe>
                             </div>
                              <div  v-if="this.currentUser==food.username" class="level-item has-text-centered">
                                 <button @click="deleteFoodPhoto(food._id)" class="button">
@@ -44,12 +33,10 @@
 
                     <div class="content">
                         <p>
-                            <strong>{{food.location}}</strong>
+                            <strong>City: {{food.location}}</strong>
                         </p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                        <a>@bulmaio</a>.
-                        <a href="#">#css</a>
-                        <a href="#">#responsive</a>
+                        {{food.desc}}
+                        <a>Zomagram.inc</a>.
                         <br>
                         <time datetime="2018-1-1"></time>
                     </div>
@@ -59,7 +46,7 @@
                         <div class="column is-11">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-medium" type="text" placeholder="Add a comment . . .">
+                                    <input class="input is-medium" type="text" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -69,51 +56,6 @@
                         </div>
                     </div>
                 </div>
-
-<!--MODAL-->
-<div class="modal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Restaurant List</p>
-      <button @click="closeModal" class="delete" aria-label="close"></button>
-    </header>
-    <section class="modal-card-body">
-      <!-- MODAL Content ... -->
-        <div v-for="(resto,index) in restos" :key="index"  class="container is-fluid">
-          <div class="columns is-multiline">
-            <div class="column is-one-fifths">
-            <div class="card-image">
-              <figure class="image is-3by3">
-                <img :src=resto.restaurant.featured_image alt="Placeholder image">
-                <p>restaurant name : {{resto.restaurant.name}}</p>
-                <p>average cost : {{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(resto.restaurant.average_cost_for_two)}}</p>
-                <p>address : {{resto.restaurant.location.address}}</p>
-                 <p>user rating : {{resto.restaurant.user_rating.aggregate_rating}}</p>
-              </figure>
-            </div>
-            </div>
-            
-
-            <hr width="100%">
-          </div>
-        </div>
-        
-      <!--END MODAL CONTENT-->
-    </section>
-    <footer class="modal-card-foot">
-      <button class="button is-success">Save changes</button>
-      <button  class="button">Cancel</button>
-    </footer>
-  </div>
-</div>
-<!--MODAL END-->
-
-
-
-
-
-
 
     </div>
 </template>

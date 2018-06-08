@@ -8,7 +8,7 @@
                     
                     <div class="box">
                         <figure class="avatar">
-                            <img src="https://placehold.it/128x128">
+                            <img src="../assets/pengu.png">
                         </figure>
 
                         <p>Foods By {{currentUser}}</p>
