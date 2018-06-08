@@ -17,12 +17,12 @@ class Controller {
             })
         })
     }
-    static showOne(req,res){
+    static show(req,res){
         // console.log(req.body.username,'username')
-        Model.findOne({username: req.params.username})
+        Model.find({username: req.params.username})
         .then(dataFood=>{
             res.status(200).json({
-                message: 'Menampilkan 1',
+                message: `menampilkan ${dataFood.name}`,
                 dataFood
             })
         })

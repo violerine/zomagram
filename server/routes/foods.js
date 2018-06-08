@@ -5,7 +5,7 @@ const images = require('../helper/images')
 var multer  = require('multer')
 
 router.get('/',controller.showAll)
-router.get('/:username',controller.showOne)
+router.get('/:username',controller.show)
 
 router.post('/upload',
 images.multer.single('image'), 
