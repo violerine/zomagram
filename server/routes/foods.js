@@ -8,6 +8,9 @@ router.get('/',controller.showAll)
 
 router.get('/userphoto/:username',controller.show)
 router.get('/photo/:photoid',controller.showPhoto)
+
+router.get('/userphoto/:username',controller.show)
+router.get('/photo/:photoid',controller.showPhoto)
 router.post('/upload',
 images.multer.single('image'),
 images.sendUploadToGCS,

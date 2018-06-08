@@ -34,6 +34,11 @@
                                     allow="encrypted-media">
                                 </iframe>
                             </div>
+                             <div  v-if="this.currentUser==food.username" class="level-item has-text-centered">
+                                <button @click="deleteFoodPhoto(food._id)" class="button">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -94,11 +99,6 @@
           </div>
         </div>
         
-
-
-
-
-
       <!--END MODAL CONTENT-->
     </section>
     <footer class="modal-card-foot">
@@ -120,62 +120,49 @@
 
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 export default {
     props:['food'],
-    // created:function(){
-    //     this.getCity()
-    // },
     data:function(){
         return{
             restos:[],
-            shareLink: ''
+            currentUser:''
         }
     },
-    created () {
-        this.getShare()
+    created:function(){
+        this.checkUsername()
+    },
+    computed:{
+        ...mapState([
+            
+        ])
     },
     methods:{
-        getShare () {
-            console.log('masuk sini')
-            let uri = 'https://www.google.com/'
-            let encoded = encodeURI(uri)
-            let shareLinks =`https://www.facebook.com/plugins/share_button.php?href=${encoded}&layout=button&size=large&mobile_iframe=true&appId=239483590150835&width=73&height=28`
-            this.shareLink = shareLinks
-        },
-        activateModal(){
-            $(".modal").addClass("is-active")
+        ...mapActions([
+            'getPost'
+        ]),
+        checkUsername(){
+            var username=localStorage.getItem('username')
+            console.log("USERNAME",username)
+            this.currentUser=username
+             console.log("THIS CURRENT USER",this.currentUser)
         },
         closeModal(){
             $(".modal").removeClass("is-active")
         },
-        getCity(location,foodname,index){
-            $(".modal").addClass("is-active")
-            $(".modal").addClass(index)
-            console.log("LOCATION",location)
-            console.log("FOODNAME",foodname)
-            let config={
-                headers:{
-                    'user-key':'58c9137440bfdc85526cf9964645e03d'
-                }
-            }
-            axios.get(`https://developers.zomato.com/api/v2.1/cities?q=${location}`,config)
-            .then(({data})=>{
-                console.log("LOCATION ID",data.location_suggestions[0].id)
-                axios.get(`https://developers.zomato.com/api/v2.1/search?entity_id=${data.location_suggestions[0].id}&entity_type=city&q=${foodname}`,config)
-                .then(({data})=>{
-                    console.log("DATA RESTO",data.restaurants)
-                    this.restos=data.restaurants
-
-                })
-                .catch(err=>{
-                    console.log(err)
-                })
-            })
+        deleteFoodPhoto(photoId){
+            axios.delete(`http://localhost:7000/photos/delete/${photoId}`)
+            .then(response=>{
+                console.log(response)
+                
+            })  
             .catch(err=>{
                 console.log(err)
             })
-        }
+            setTimeout(() => {
+            this.getPost()
+            }, 200)
+        },
     }
 }
 </script>
