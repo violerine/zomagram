@@ -26,27 +26,7 @@ Location:
   </div>
 </div>
 <!--FILE UPLOAD-->
-
-            <div class="file has-name container">
-                <label class="file-label">
-                    <input @change="previewFile"  class="file-input" type="file" name="resume">
-                    <span class="file-cta">
-                    <span class="file-icon">
-                        <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">
-                        Choose a file…
-                    </span>
-                    </span>
-                    <span class="file-name">
-                    {{this.filename}}
-                    </span>
-                </label>
-                <div id="output"></div>
-            </div>
-            
-
-        <!--FILE UPLOAD END-->
+<input class="btn btn-outline-primary" type="file" @change="onFilePicked" ref="file" accept="image/*">
 <button  @click="addNewFood" type="button" class="button is-link">Submit</button>
 </div>
 
@@ -70,38 +50,22 @@ export default {
             name:'',
             description:'',
             location:'',
-            formdata:new FormData(),
-            filename:''
+            file:''
         }
     },
     methods:{
-        previewFile(file){
-          console.log({Event})
-          var filedata = file.target.files[0]
-          this.filename = filedata.name
-          this.formdata.append('image',filedata)
-          console.log(this.formdata)   
-          console.log("FILEDATA",filedata)
+        onFilePicked() {
+            this.file = this.$refs.file.files[0]
         },
         addNewFood(){
-            var usernameLocalStorage= localStorage.getItem('username')
-            let config ={
-                headers : {'content-type' : 'multipart/form-data'}
-            }
-            axios.post('http://localhost:7000/photos/upload',{
-                name:this.name,
-                desc:this.description,
-                location:this.location,
-                image:this.formdata,
-                username:usernameLocalStorage
-            },config)
-            .then(({data})=>{
-                console.log("DATA UPLOAD FOTO",data)
-            })
-            .catch(err=>{
-                console.log(this.formdata)
-                console.log("ERRORNYA KENAPA",err)
-            })
+            let formData = new FormData()
+            formData.append('image', this.file)
+            formData.append('username', localStorage.getItem('username'))
+            formData.append('name',this.name)
+            formData.append('description',this.description)
+            formData.append('location',this.location)
+            this.$store.dispatch('uploadImage', formData)
+            this.$store.dispatch('getAllPost')
         }
     }
 }
