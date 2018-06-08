@@ -16,10 +16,22 @@
                 <p>average cost : {{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(resto.restaurant.average_cost_for_two)}}</p>
                 <p>address : {{resto.restaurant.location.address}}</p>
                  <p>user rating : {{resto.restaurant.user_rating.aggregate_rating}}</p>
+                 <button @click="getShare(resto.restaurant.url)">share</button>
+                 <div v-if="sharestat">
+                   <iframe 
+                    :src="shareLink" 
+                    width="73" 
+                    height="28" 
+                    style="border:none;overflow:hidden" 
+                    scrolling="no" 
+                    frameborder="0" 
+                    allowTransparency="true" 
+                    allow="encrypted-media">
+                </iframe>
+                 </div>                
               </figure>
             </div>
             </div>         
-
             <hr width="50%">
           </div>
         </div>
@@ -37,7 +49,8 @@ export default {
   },
   data:function(){
     return{
-      restos:[]
+      restos:[],
+      sharestat: false
     }
   },
   computed: {
@@ -46,9 +59,16 @@ export default {
     ])
   },
   created () {
-    this.$store.dispatch('getone', this.$route.params.id)
+    this.$store.dispatch('getone', this.$route.params.id)    
   },
   methods: {
+    getShare (link) {
+            this.sharestat = true
+            let uri = link
+            let encoded = encodeURI(uri)
+            let shareLinks =`https://www.facebook.com/plugins/share_button.php?href=${encoded}&layout=button&size=large&mobile_iframe=true&appId=239483590150835&width=73&height=28`
+            this.shareLink = shareLinks
+        },
     getCity(foodname,location){
             let config={
                 headers:{
@@ -62,7 +82,6 @@ export default {
                 .then(({data})=>{
                     console.log("DATA RESTO",data.restaurants)
                     this.restos=data.restaurants
-
                 })
                 .catch(err=>{
                     console.log(err)

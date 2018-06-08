@@ -22,16 +22,17 @@
                     <div class="level is-mobile">
                         <div class="level-left">
                             <div class="level-item has-text-centered">
-                                <a href="">
-                                    <i class="material-icons">favorite_border</i>
-                                </a>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <a href="">
-                                        <i class="material-icons">chat_bubble_outline</i>
-                                    </a>
-                                </div>
+                                
+                                <iframe 
+                                    :src="shareLink" 
+                                    width="73" 
+                                    height="28" 
+                                    style="border:none;overflow:hidden" 
+                                    scrolling="no" 
+                                    frameborder="0" 
+                                    allowTransparency="true" 
+                                    allow="encrypted-media">
+                                </iframe>
                             </div>
                              <div  v-if="this.currentUser==food.username" class="level-item has-text-centered">
                                 <button @click="deleteFoodPhoto(food._id)" class="button">
