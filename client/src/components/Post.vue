@@ -123,6 +123,12 @@
 import {mapState, mapActions} from 'vuex'
 export default {
     props:['food'],
+    data:function(){
+        return{
+            restos:[],
+            currentUser:''
+        }
+    },
     created:function(){
         this.checkUsername()
     },
@@ -131,12 +137,6 @@ export default {
             
         ])
     },
-    data:function(){
-        return{
-            restos:[],
-            currentUser:''
-        }
-    },
     methods:{
         ...mapActions([
             'getPost'
@@ -144,8 +144,8 @@ export default {
         checkUsername(){
             var username=localStorage.getItem('username')
             console.log("USERNAME",username)
-            console.log("THIS CURRENT USER",this.currentUser)
             this.currentUser=username
+             console.log("THIS CURRENT USER",this.currentUser)
         },
         closeModal(){
             $(".modal").removeClass("is-active")

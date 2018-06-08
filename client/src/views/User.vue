@@ -49,10 +49,10 @@ export default {
     methods:{
         getFoodByUsername(){
             const username = localStorage.getItem('username')
-            axios.get(`http://localhost:7000/photos/${username}`)
+            axios.get(`http://localhost:7000/photos/userphoto/${username}`)
             .then(({data})=>{
-                this.posts=data
-                console.log("FOOD BY USERNAME",data)
+                this.posts=data.dataFood
+                console.log("FOOD BY USERNAME",data.dataFood)
             })
             .catch(err=>{
                 console.log(err)
