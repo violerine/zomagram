@@ -53,9 +53,16 @@ export default {
     components:{
         Navbar
     },
+    created:function(){
+    this.checkUser()
+    if(this.statlog==true){
+        this.$router.push('/home')
+    }
+    },
     computed:{
         ...mapState([
-            'checkLogin'
+            'checkLogin',
+            'statlog'
         ])
     },
     data: function () {
@@ -87,6 +94,11 @@ export default {
                 swal("wrong password/username")
             })
          },
+        checkUser(){
+            this.currentUser=localStorage.getItem('username')
+            this.$store.dispatch('cekstat')
+            
+        }
 
         
     }

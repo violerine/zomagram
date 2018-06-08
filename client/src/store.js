@@ -87,6 +87,7 @@ export default new Vuex.Store({
       })
       .catch(function (err) {
         console.log(err.response.data.message)
+        swal('Please fill the field correctly')
         let errorMsg = err
         // swal(errorMsg)
       })

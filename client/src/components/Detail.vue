@@ -1,45 +1,11 @@
 <template>
   <div>
     <Navbar/>
-    <h1 style="margin-top:50px;">restaurant list for {{onefood.name}} in {{onefood.location}}</h1>
+    <p style="margin-top:100px;">Restaurant List for {{onefood.name}} in {{onefood.location}}</p>
+    <br>
     <button class="button is-success" @click="getCity(onefood.name, onefood.location)">click to show</button>
     <br>
     <br>
-    <!-- <div style="text-align: center;">
-        <div v-for="(resto,index) in restos" :key="index"  class="container is-fluid">
-          <div class="columns is-multiline">
-            <div class="column is-one-fifths">
-            <div class="card-image">
-              <figure class="image is-3by3">
-                <img :src=resto.restaurant.featured_image alt="Placeholder image">
-                <p>restaurant name : {{resto.restaurant.name}}</p>
-                <p>average cost : {{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(resto.restaurant.average_cost_for_two)}}</p>
-                <p>address : {{resto.restaurant.location.address}}</p>
-                 <p>user rating : {{resto.restaurant.user_rating.aggregate_rating}}</p>
-                 <button @click="getShare(resto.restaurant.url)">share</button>
-                 <div v-if="sharestat">
-                   <iframe 
-                    :src="shareLink" 
-                    width="73" 
-                    height="28" 
-                    style="border:none;overflow:hidden" 
-                    scrolling="no" 
-                    frameborder="0" 
-                    allowTransparency="true" 
-                    allow="encrypted-media">
-                </iframe>
-                 </div>                
-              </figure>
-            </div>
-            </div>         
-            <hr width="50%">
-          </div>
-        </div>
-    </div> -->
-
-
-
-
 <!--CARD-->
 <div class="container ">
 <div class="columns is-multiline">
@@ -60,8 +26,20 @@
         <p class="title is-6">address : {{resto.restaurant.location.address}}</p>
 
         <p class="title is-6">user rating : {{resto.restaurant.user_rating.aggregate_rating}}</p>
-        <br><br>       
-        
+        <br>    
+        <button @click="getShare(resto.restaurant.url)">share</button>
+                <div v-if="sharestat">
+                  <iframe
+                   :src="shareLink"
+                   width="73"
+                   height="28"
+                   style="border:none;overflow:hidden"
+                   scrolling="no"
+                   frameborder="0"
+                   allowTransparency="true"
+                   allow="encrypted-media">
+               </iframe>
+                </div>
   </div>
 </div>
 </div>
@@ -124,7 +102,7 @@ export default {
                 })
             })
             .catch(err=>{
-                swal('location id not defined')
+                swal("Zomato doesn't support this city")
                 console.log(err)
             })
         }
