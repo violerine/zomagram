@@ -16,11 +16,11 @@ class Controller {
             })
         })
     }
-
     static show(req,res){
         Model.find({username: req.params.username})
         .then(dataFood=>{
             res.status(200).json({
+                message: `menampilkan food berdasarkan user`,
                 dataFood
             })
         })
@@ -55,7 +55,7 @@ class Controller {
             url : req.file.cloudStoragePublicUrl,
             username: req.body.username
         }
-        
+
         let newUpload = new Model(data)
         newUpload.save()
         .then(dataFood=>{

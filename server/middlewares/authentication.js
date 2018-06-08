@@ -13,7 +13,6 @@ module.exports = function(req, res, next) {
           user.password
         );
         if (isPasswordTrue) {
-          console.log(user);
           next();
         } else {
           res.status(400).json({

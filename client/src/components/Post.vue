@@ -22,7 +22,6 @@
                     <div class="level is-mobile">
                         <div class="level-left">
                             <div class="level-item has-text-centered">
-
                             </div>
                              <div  v-if="this.currentUser==food.username" class="level-item has-text-centered">
                                 <button @click="deleteFoodPhoto(food._id)" class="button">
