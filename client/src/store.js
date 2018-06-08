@@ -9,7 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     foods: [],
-    statlog:''
+    statlog:'',
+    onefood: ''
   },
   mutations: {
     setFoods (state, payload) {
@@ -17,6 +18,10 @@ export default new Vuex.Store({
     },
     setStat (state,payload) {
       state.statlog = payload
+    },
+    setone (state,payload) {
+      console.log('payloadddd=', payload)
+      state.onefood = payload
     }
   },
   actions: {
@@ -40,6 +45,17 @@ export default new Vuex.Store({
       localStorage.clear()
       context.commit('setStat', false)
       swal('succesfully logged out')
+    },
+    getone (context, payload) {
+      axios.get(`http://localhost:7000/photos/photo/${payload}`)
+      .then(response => {
+        console.log('success', response.data.dataFood)
+        let payload = response.data.dataFood
+        context.commit('setone', payload)
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
     },
     getPost: function (context) {
       axios.get('http://localhost:7000/photos/')

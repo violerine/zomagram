@@ -6,6 +6,7 @@ import Register from './views/Register.vue'
 import Login from './views/Login.vue'
 import User from './views/User.vue'
 import NewPhoto from './views/NewPhoto.vue'
+import Detail from './components/Detail'
 
 Vue.use(Router)
 
@@ -41,5 +42,10 @@ export default new Router({
       name: 'NewPhoto',
       component: NewPhoto
     },
+    {
+      path: '/:id',
+      name: 'detail',
+      component: Detail
+    }
   ]
 })

@@ -58,9 +58,8 @@
                             </div>
                         </div>
                         <div class="column has-text-centered">
-                            <button @click="getCity(food.location, food.name,index)" class="button">
-                                <i class="material-icons">more_horiz</i>
-                            </button>
+                            <router-link :to="{ name: 'detail', params: { id: food._id }}">...</router-link>
+                            <router-view/>
                         </div>
                     </div>
                 </div>
