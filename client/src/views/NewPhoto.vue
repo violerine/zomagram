@@ -65,7 +65,7 @@ export default {
             formData.append('description',this.description)
             formData.append('location',this.location)
             this.$store.dispatch('uploadImage', formData)
-            this.$store.dispatch('getAllPost')
+            this.$store.dispatch('getPost')
         }
     }
 }

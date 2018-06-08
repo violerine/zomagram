@@ -22,7 +22,7 @@ class Controller {
         Model.findOne({username: req.params.username})
         .then(dataFood=>{
             res.status(200).json({
-                message: 'Menampilkan 1',
+                // message: 'Menampilkan 1',
                 dataFood
             })
         })
