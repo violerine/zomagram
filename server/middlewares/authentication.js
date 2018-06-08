@@ -14,11 +14,11 @@ module.exports = function(req, res, next) {
           user.password
         );
         if (isPasswordTrue) {
-          console.log(user)
           next();
         }
       }
-      res.status(400).json({
+      console.log('errorrrorororo')
+      res.status(400).send({
         message: "username / password wrong"
       });
     })

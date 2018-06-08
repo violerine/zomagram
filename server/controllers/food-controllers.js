@@ -3,7 +3,6 @@ const images = require('../helper/images')
 
 class Controller {
     static showAll(req,res){
-        // res.send('halaman utama')
         Model.find()
         .then(foods=>{
             res.status(200).json({
@@ -17,12 +16,11 @@ class Controller {
             })
         })
     }
-    static showOne(req,res){
-        // console.log(req.body.username,'username')
-        Model.findOne({username: req.params.username})
+    static show(req,res){
+        Model.find({username: req.params.username})
         .then(dataFood=>{
             res.status(200).json({
-                message: 'Menampilkan 1',
+                message: `menampilkan food berdasarkan user`,
                 dataFood
             })
         })
@@ -32,6 +30,22 @@ class Controller {
             })
         })
     }
+    static showPhoto(req,res){
+        console.log('masuk gak?')
+        Model.findOne({_id: req.params.photoid})
+        .then(dataFood=>{
+            res.status(200).json({
+                message: `menampilkan foto dengan id ${dataFood._id}`,
+                dataFood
+            })
+        })
+        .catch(err=>{
+            res.status(200).json({
+                message: err.message
+            })
+        })
+    }
+
     static upload(req,res){
         console.log("REQ FILE",req.file)
         let data = {
@@ -41,7 +55,7 @@ class Controller {
             url : req.file.cloudStoragePublicUrl,
             username: req.body.username
         }
-        
+
         let newUpload = new Model(data)
         newUpload.save()
         .then(dataFood=>{

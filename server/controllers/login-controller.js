@@ -44,7 +44,6 @@ module.exports = {
   login: function(req, res) {
     let username = req.body.username;
     let token = jwt.sign({ username }, process.env.SECRET_KEY);
-    console.log('masuuuuuuuk', token)
     res.status(200).json({
       message: "successfully sign in",
       token,

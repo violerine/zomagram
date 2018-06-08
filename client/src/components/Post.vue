@@ -22,16 +22,17 @@
                     <div class="level is-mobile">
                         <div class="level-left">
                             <div class="level-item has-text-centered">
-                                <a href="">
-                                    <i class="material-icons">favorite_border</i>
-                                </a>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <a href="">
-                                        <i class="material-icons">chat_bubble_outline</i>
-                                    </a>
-                                </div>
+                                
+                                <iframe 
+                                    :src="shareLink" 
+                                    width="73" 
+                                    height="28" 
+                                    style="border:none;overflow:hidden" 
+                                    scrolling="no" 
+                                    frameborder="0" 
+                                    allowTransparency="true" 
+                                    allow="encrypted-media">
+                                </iframe>
                             </div>
                         </div>
                     </div>
@@ -127,10 +128,21 @@ export default {
     // },
     data:function(){
         return{
-            restos:[]
+            restos:[],
+            shareLink: ''
         }
     },
+    created () {
+        this.getShare()
+    },
     methods:{
+        getShare () {
+            console.log('masuk sini')
+            let uri = 'https://www.google.com/'
+            let encoded = encodeURI(uri)
+            let shareLinks =`https://www.facebook.com/plugins/share_button.php?href=${encoded}&layout=button&size=large&mobile_iframe=true&appId=239483590150835&width=73&height=28`
+            this.shareLink = shareLinks
+        },
         activateModal(){
             $(".modal").addClass("is-active")
         },
