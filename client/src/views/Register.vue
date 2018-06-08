@@ -63,6 +63,16 @@ export default {
           email: '',
           password: ''
         }
+  },
+  methods : {
+      register () {
+        let body = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch('register', body)
+      }
   }
 }
 </script>

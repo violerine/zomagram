@@ -4,8 +4,8 @@
 
     <div class="columns body-columns">
         <div class="column is-half is-offset-one-quarter">
-        <div  v-for="(post,index) in posts" :key="index" class="posts">
-          <Post :posts="post"/>
+        <div  v-for="(food,index) in foods" :key="index" class="posts">
+          <Post :food = "food"/>
         </div>
 
             <footer class="footer">
@@ -32,15 +32,21 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 import Navbar from '@/components/Navbar.vue'
 import Post from '@/components/Post.vue'
+import {mapState} from 'vuex'
 
 export default {
   name: 'home',
+    computed: {
+        ...mapState([
+        'foods'
+        ])
+    },
   created:function(){
-    this.getPosts()
+    this.$store.dispatch('getPost')
   },
   data:function(){
       return{
-          posts:[]
+
       }
   },
   components: {
@@ -49,17 +55,6 @@ export default {
     Post,
   },
   methods:{
-      getPosts(){
-         axios.get('http://localhost:7000/photos/')
-         .then(({data})=>{
-             console.log(data.foods)
-             this.posts = data.foods
-             
-         }) 
-         .catch(err=>{
-             console.log(err)
-         })
-      },
   }
 }
 

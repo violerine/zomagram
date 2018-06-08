@@ -14,7 +14,7 @@
                         <p>User:</p>
                     <router-link to="/new"><button class="button">Upload New Food</button></router-link>
                     <div v-for="(post,index) in posts" :key="index" class="postsbyuserrname">
-                        <Post :post="post"/>
+                        <p>{{post}}</p>
                     </div>
                     </div>
             

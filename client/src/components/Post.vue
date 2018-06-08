@@ -1,5 +1,5 @@
 <template>
-          <div class="card">
+          <div class="card" >
                 <div class="header">
                     <div class="media">
                         <div class="media-left">
@@ -8,14 +8,14 @@
                             </figure>
                         </div>
                         <div class="media-content">
-                            <p class="title is-4">{{post.name}}</p>
-                            <p class="subtitle is-6">{{post.username}}</p>
+                            <p class="title is-4">{{food.name}}</p>
+                            <p class="subtitle is-6">{{food.username}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="card-image">
                     <figure class="image is-4by3">
-                        <img :src=post.url alt="Placeholder image">
+                        <img :src=food.url alt="Placeholder image">
                     </figure>
                 </div>
                 <div class="card-content">
@@ -38,7 +38,7 @@
 
                     <div class="content">
                         <p>
-                            <strong>{{post.location}}</strong>
+                            <strong>{{food.location}}</strong>
                         </p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
                         <a>@bulmaio</a>.
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="column has-text-centered">
-                            <button @click="getCity(post.location,post.name)" class="button">
+                            <button @click="getCity(food.location, food.name,index)" class="button">
                                 <i class="material-icons">more_horiz</i>
                             </button>
                         </div>
@@ -66,69 +66,30 @@
                 </div>
 
 <!--MODAL-->
-
 <div class="modal">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
+      <p class="modal-card-title">Restaurant List</p>
       <button @click="closeModal" class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
       <!-- MODAL Content ... -->
-
-         <div class="container is-fluid">
-          <div class="columns is-multiline">
-            <div class="column is-one-fifths">
-              <b>Restaurant Name:</b>
-            </div>
-            <div class="column">
-              <b>Price:</b><br>
-            </div>
-            <div class="column">
-              <b>Description:</b><br>
-            </div>
-            <div class="column">
-              <b>Amount:</b>
-            </div>
-            <div class="column">
-              
-            </div>
-
-            </div>
-          </div>
-
-
-
         <div v-for="(resto,index) in restos" :key="index"  class="container is-fluid">
           <div class="columns is-multiline">
             <div class="column is-one-fifths">
-              <b>{{resto}}</b>
             <div class="card-image">
               <figure class="image is-3by3">
-                <img :src=resto.featured_image alt="Placeholder image">
+                <img :src=resto.restaurant.featured_image alt="Placeholder image">
+                <p>restaurant name : {{resto.restaurant.name}}</p>
+                <p>average cost : {{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(resto.restaurant.average_cost_for_two)}}</p>
+                <p>address : {{resto.restaurant.location.address}}</p>
+                 <p>user rating : {{resto.restaurant.user_rating.aggregate_rating}}</p>
               </figure>
             </div>
             </div>
-            <div class="column">
-              <!-- <b>Price:</b><br> -->
-              {{resto.average_cost_for_two}}
-            </div>
-            <div class="column">
-              <!-- <b>Description:</b><br> -->
-              {{resto.location.locality}}
-            </div>
-            <div class="column">
-              <!-- <b>Amount</b> -->
-              <div class="field">
-                  <p>{{resto.user_rating.rating_text}}</p>
-              </div>
-            </div>
+            
 
-          <div class="column">
-              <br>
-              <button class="button is-danger" type="button">Remove</button>
-          </div>
             <hr width="100%">
           </div>
         </div>
@@ -146,8 +107,6 @@
     </footer>
   </div>
 </div>
-
-
 <!--MODAL END-->
 
 
@@ -161,8 +120,9 @@
 
 
 <script>
+import {mapState} from 'vuex'
 export default {
-    props:['post'],
+    props:['food'],
     // created:function(){
     //     this.getCity()
     // },
@@ -178,8 +138,9 @@ export default {
         closeModal(){
             $(".modal").removeClass("is-active")
         },
-        getCity(location,foodname){
+        getCity(location,foodname,index){
             $(".modal").addClass("is-active")
+            $(".modal").addClass(index)
             console.log("LOCATION",location)
             console.log("FOODNAME",foodname)
             let config={
