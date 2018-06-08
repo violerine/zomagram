@@ -18,13 +18,13 @@
             </div>
         </div>
         <div class="navbar-item is-flex-touch">
-            <a class="navbar-item">
+            <!-- <a class="navbar-item">
                 <p  class="control">
                     <button aria-haspopup="true" class="button">
                      <span><router-link to="/login">Login</router-link></span>
                     </button>
                 </p>
-            </a>
+            </a> -->
                <a class="navbar-item">
                 <p  class="control">
                     <button aria-haspopup="true" class="button">

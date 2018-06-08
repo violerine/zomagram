@@ -22,15 +22,15 @@
                     <div class="level is-mobile">
                         <div class="level-left">
                             <div class="level-item has-text-centered">
-                                <a href="">
-                                    <i class="material-icons">favorite_border</i>
-                                </a>
-                            </div>
-                            <div class="level-item has-text-centered">
                                 <div>
-                                    <a href="">
-                                        <i class="material-icons">chat_bubble_outline</i>
-                                    </a>
+                                    <iframe src="" 
+                                    width="73" 
+                                    height="28" 
+                                    style="border:none;overflow:hidden" 
+                                    scrolling="no" 
+                                    frameborder="0" 
+                                    allowTransparency="true" 
+                                    allow="encrypted-media"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -65,12 +65,33 @@
                     </div>
                 </div>
             </div>
+             
 </template>
 
-
 <script>
+
 export default {
     
+    data:{
+        url: ''
+    },
+    created: {
+        shareFB(){
+            let uri = 'https://www.zomato.com/jakarta'
+            let encode = encodeURIComponent(uri)
+            console.log(encode);
+            let shareLink = `https://www.facebook.com/plugins/share_button.php?href=${encode}&layout=button&size=large&mobile_iframe=true&appId=239483590150835&width=73&height=28`
+            this.url = shareLink
+        }
+    },
+    // methods: {
+    //     shareFB(uri) {
+    //         // return !window.open(link,'Facebook', 'width=640px,height=580px')
+    //         let encode = encodeURIComponent(uri)
+    //         console.log(encode);
+    //         let shareLink = `https://www.facebook.com/plugins/share_button.php?href=${encode}&layout=button&size=large&mobile_iframe=true&appId=239483590150835&width=73&height=28`
+    //     }
+    // }
 }
 </script>
 

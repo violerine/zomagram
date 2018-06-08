@@ -25,11 +25,16 @@
                             </div>
                             <div class="field">
                                 <label class="checkbox">
-                  <input type="checkbox">
-                  Remember me
-                </label>
+                                    <input type="checkbox">
+                                    Remember me
+                                </label>
                             </div>
-                            <button type="button" @click="login" class="button is-block is-link is-large is-fullwidth">Login</button>
+                            <div class="field">
+                                <button type="button" @click="login" class="button is-link is-outlined is-large is-fullwidth">Login standard</button>
+                            </div>
+                            <div class="field">
+                                <button type="button" @click="loginFB" class="button is-link is-large is-fullwidth"><i class="fab fa-facebook"></i> &nbsp; Login with facebook</button>
+                            </div>
                         </form>
 
                     </div>
@@ -53,6 +58,40 @@
 import Navbar from '@/components/Navbar.vue'
 
 export default {
+    created: function () {
+      (function (d, s, id) {
+        var js
+        var fjs = d.getElementsByTagName(s)[0]
+        if (d.getElementById(id)) return
+        js = d.createElement(s)
+        js.id = id
+        // js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=119308148780939"
+        js.src = '//connect.facebook.net/en_US/sdk.js'
+        fjs.parentNode.insertBefore(js, fjs)
+      }(document, 'script', 'facebook-jssdk'))
+      window.fbAsyncInit = function () {
+        window.FB.init({
+          appId: '239483590150835',
+          cookie: true,
+          xfbml: true,
+          version: 'v2.8'
+        })
+      }
+    },
+    methods:{
+        loginFB () {
+            window.FB.login((response) => {
+                console.log('statusChangeCallback')
+                console.log(response)
+                if (response.status === 'connected') {
+                    localStorage.setItem('fb_access_token', response.authResponse.accessToken)
+                    // this.testAPI()
+                } else {
+                    alert('please login')
+                }
+            })
+        }
+    },
     components:{
         Navbar
     }
